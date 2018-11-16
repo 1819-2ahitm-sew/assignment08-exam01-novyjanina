@@ -1,5 +1,8 @@
 package at.htl.exam01.compress;
 
+import org.omg.CORBA.SystemException;
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
@@ -14,10 +17,15 @@ public class StringCompress {
      *
      * @param args
      */
+
     public static void main(String[] args) {
         StringCompress sc = new StringCompress();
         String[] text = sc.readFromFile(FILE_NAME);
         sc.print(text);
+
+
+
+
     }
 
 
@@ -40,10 +48,33 @@ public class StringCompress {
      * @param fileName
      * @return String-Array mit dem entpacktem Text
      */
+
     public String[] readFromFile(String fileName) {
+        int zeilenanzahl = getNoOfLines(fileName);
+        String help="";
+        String letter="";
+        int number;
+        String [] liste = new String[zeilenanzahl];
 
 
-        return null;
+        try (Scanner scanner = new Scanner(new FileReader(fileName))){
+
+            for (int i = 0; i < zeilenanzahl; i++) {
+                help=scanner.nextLine();
+                letter= help.substring(0,1);
+                number=Integer.parseInt(help.substring(1));
+                liste[i] ="";
+
+                for (int k = 0; k < number; k++) {
+                    liste[i] += letter;
+
+                }
+            }
+        }catch (FileNotFoundException e){
+            System.err.println(e.getMessage());
+        }
+
+        return liste;
     }
 
 
@@ -55,6 +86,10 @@ public class StringCompress {
      */
     public void print(String[] lines) {
 
+        for (int i = 0; i < lines.length; i++) {
+            System.out.println(lines[i]);
+        }
+
     }
 
     /**
@@ -64,8 +99,17 @@ public class StringCompress {
      * @return Anzahl der Zeilen in der Textdatei
      */
     public int getNoOfLines(String fileName) {
+        int counter=0;
+        try (Scanner scanner = new Scanner(new FileReader(fileName))){
 
+            while (scanner.hasNextLine()){
+                counter++;
+                scanner.nextLine();
+            }
 
-        return -1;
+        }catch (FileNotFoundException e){
+            System.err.println(e.getMessage());
+        }
+        return counter;
     }
 }
