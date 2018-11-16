@@ -1,7 +1,5 @@
 package at.htl.exam01.document;
 
-import javax.xml.crypto.dom.DOMCryptoContext;
-
 public class Main {
 
 
@@ -27,41 +25,12 @@ public class Main {
      */
     public static void main(String[] args) {
 
+        Document[] Book = new Document[2];
+        Document[] Email = new Document[1];
+
 
     }
 }
 
-abstract class Document{
-    String author;
-
-    public void document(String Author){
-
-    }
-
-    public String getAuthor(){
-
-        return this.author;
-    }
-
-}
-
-class Book extends Document{
-    String title;
-
-    public void book(String author, String title ){
-
-    }
-
-    public String getTitle(){
-        return this.title;
-    }
-
-}
-
-class Email extends Document{
-    String subject;
-
-
-}
 
 
