@@ -1,6 +1,7 @@
 package at.htl.exam01.document;
 
 class Email extends Document{
+
     private String subject;
     private String to;
 
@@ -8,12 +9,17 @@ class Email extends Document{
         return this.subject;
     }
 
-    public void email(String author,String subject, String to) {
-
+    public Email(String author,String subject, String to) {
+        super(author);
+        this.subject=subject;
+        this.to=to;
     }
 
-    public String getTo(){
-        return this.to;
-    }
 
+
+
+    @Override
+    public String toString() {
+        return "Email: '"+this.subject +"' von "+this.author+" an "+this.to;
+    }
 }
